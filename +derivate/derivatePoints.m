@@ -8,8 +8,6 @@ function fpx = derivatePoints(points, x0, h, options)
         options.extrapolation_order (1,1) double {mustBePositive, mustBeInteger} = 1
     end
 
-    import metodos.derivation.derivatePoints
-
     keys = points.keys;
     for i = 1:length(keys)
         mustBeA(keys(i), 'string');

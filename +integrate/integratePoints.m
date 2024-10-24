@@ -14,7 +14,6 @@ function intx = integratePoints(points, x0, xn, n, options)
     
     format long
     
-
     if options.open
         h = (xn - x0)/(n+2);
         x0 = x0 + h;

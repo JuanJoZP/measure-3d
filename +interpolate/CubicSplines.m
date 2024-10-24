@@ -1,5 +1,3 @@
-
-
 classdef CubicSplines < handle
     properties(Access=public)
         points (:, 2) double
@@ -21,7 +19,7 @@ classdef CubicSplines < handle
                 end
             end
 
-            import metodos.utils.EqSystem
+            import utils.EqSystem
             eq = EqSystem(varnames);
 
             splines_coefs_names = strings(length(points)-1, 4);
@@ -110,7 +108,7 @@ classdef CubicSplines < handle
                 options.tolerance = 1
                 options.hold = false
             end
-            import metodos.utils.evalf
+            import utils.evalf
             p = obj.points;
             tolerance = (p(end, 1)-p(1,1))/size(p, 1);
             x = linspace(p(1,1)-tolerance*options.tolerance, p(end,1)+tolerance*options.tolerance, 100);
@@ -143,7 +141,7 @@ classdef CubicSplines < handle
         end
 
         function fx = eval(obj, x)
-            import metodos.utils.evalf
+            import utils.evalf
             i = 1;
             while x >= obj.points(i, 1) & i ~= size(obj.points, 1)
                 i = i + 1;

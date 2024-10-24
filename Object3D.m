@@ -10,6 +10,8 @@ classdef Object3D
         function obj = Object3D(inputArg1,inputArg2)
             %OBJECT3D Construct an instance of this class
             %   Detailed explanation goes here
+            import derivate.derivatePoints
+            derivatePoints(123);
             obj.Property1 = inputArg1 + inputArg2;
         end
         
