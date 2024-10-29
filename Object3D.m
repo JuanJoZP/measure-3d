@@ -1,24 +1,26 @@
-classdef Object3D
-    %OBJECT3D Summary of this class goes here
-    %   Detailed explanation goes here
-    
+classdef Object3D 
     properties
-        Property1
+        points (:, 3) double
     end
     
     methods
-        function obj = Object3D(inputArg1,inputArg2)
-            %OBJECT3D Construct an instance of this class
-            %   Detailed explanation goes here
-            import derivate.derivatePoints
-            derivatePoints(123);
-            obj.Property1 = inputArg1 + inputArg2;
+        function obj = Object3D(filename)
+            file_split = split(filename, ".");
+            assert(file_split(2) == "asc", "Only supports .asc files")
+
+            obj.points = importdata(filename).data;
         end
         
-        function outputArg = method1(obj,inputArg)
-            %METHOD1 Summary of this method goes here
-            %   Detailed explanation goes here
-            outputArg = obj.Property1 + inputArg;
+        function plot(obj)
+            scatter3(obj.points(:, 1), obj.points(:, 2), obj.points(:, 3))
+        end
+
+        function volume = volumeTotal(obj)
+            error("Not implemented yet")
+        end
+
+        function surface = surfaceTotal(obj)
+            error("Not implemented yet")
         end
     end
 end
