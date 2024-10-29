@@ -14,6 +14,14 @@ classdef Object3D
         function plot(obj)
             scatter3(obj.points(:, 1), obj.points(:, 2), obj.points(:, 3))
         end
+
+        function volume = volumeTotal(obj)
+            error("Not implemented yet")
+        end
+
+        function surface = surfaceTotal(obj)
+            error("Not implemented yet")
+        end
     end
 end
 
