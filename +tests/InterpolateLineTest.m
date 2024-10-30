@@ -16,7 +16,7 @@ classdef InterpolateLineTest < matlab.unittest.TestCase
 
             % get interpolateLine
             import interpolate.InterpolateLine
-            points = [x' y' z']; % half the points (odd index)
+            points = [x' y' z']; 
             param = InterpolateLine(points, lower, upper);
 
             % get uniform sample from coil equation
@@ -53,7 +53,7 @@ classdef InterpolateLineTest < matlab.unittest.TestCase
 
             % get interpolateLine
             import interpolate.InterpolateLine
-            points = [x' y' z']; % half the points (odd index)
+            points = [x' y' z']; 
             param = InterpolateLine(points, lower, upper);
 
             % get uniform sample from coil equation
@@ -93,7 +93,7 @@ classdef InterpolateLineTest < matlab.unittest.TestCase
 
             % get interpolateLine
             import interpolate.InterpolateLine
-            points = [x' y' z']; % half the points (odd index)
+            points = [x' y' z'];
             param = InterpolateLine(points, lower, upper);
 
             % get uniform sample from coil equation
