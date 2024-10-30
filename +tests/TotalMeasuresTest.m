@@ -1,4 +1,4 @@
-classdef MeasuresTest < matlab.unittest.TestCase
+classdef TotalMeasuresTest < matlab.unittest.TestCase
     methods (Test)
         function volumeTotalCubo(testCase)
             cubo = Object3D("Cubo.asc");

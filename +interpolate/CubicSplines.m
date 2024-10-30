@@ -1,5 +1,5 @@
 classdef CubicSplines < handle
-    properties(Access=public)
+    properties
         points (:, 2) double
         splines (1, :) sym
     end
@@ -10,6 +10,8 @@ classdef CubicSplines < handle
                 points
                 options.frontier_values (1, 2) double = [0 0] % array [a b] where a = f'(x_0) ; b = f'(x_n)
             end
+            assert(issorted(points(:, 1)), "Domain must be sorted in ascending order");
+
             obj.points = points;
             varnames = {};
             coefs = ["a", "b", "c", "d"];
@@ -136,18 +138,42 @@ classdef CubicSplines < handle
             end
         end
 
-        function spline = getSpline(obj, i)
-            spline = obj.splines(1, i);
-        end
-
         function fx = eval(obj, x)
             import utils.evalf
             i = 1;
             while x >= obj.points(i, 1) & i ~= size(obj.points, 1)
                 i = i + 1;
             end
-            spline = obj.getSpline(i-1);
+            spline = obj.splines(i-1);
             fx = evalf(spline, x);
+        end
+
+        function image = eval_set(obj, set)
+            arguments
+                obj 
+                set (1, :) double
+            end
+            % validate domain
+            assert(set(1) >= obj.points(1, 1) & set(end) <= obj.points(end, 1), "preimage must be within the domain of the splines")
+            assert(issorted(set), "preimage must be in ascending order")
+            
+            import utils.evalf
+            point_i = 1;
+            preimage_i = 1;
+            image = zeros(1, length(set));
+            while preimage_i <= length(set)
+                if set(preimage_i) > obj.points(point_i, 1)
+                    point_i = point_i + 1;
+                elseif set(preimage_i) == obj.points(1, 1) % special case: preimage(i) equal to lower bound
+                    spline = obj.splines(1);
+                    image(preimage_i) = evalf(spline, set(preimage_i));
+                    preimage_i = preimage_i + 1;
+                else
+                    spline = obj.splines(point_i-1);
+                    image(preimage_i) = evalf(spline, set(preimage_i));
+                    preimage_i = preimage_i + 1;
+                end
+            end
         end
     end
 end
