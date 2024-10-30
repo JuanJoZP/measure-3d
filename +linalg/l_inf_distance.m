@@ -1,7 +1,15 @@
-function [outputArg1,outputArg2] = l_inf_distance(inputArg1,inputArg2)
-%L_INF_DISTANCE Summary of this function goes here
-%   Detailed explanation goes here
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
-end
+function distance = l_inf_distance(vector1, vector2)
+    arguments
+        vector1 (1, :) double
+        vector2 (1, :) double
+    end
+    assert(length(vector1) == length(vector2), "Distance is not defined for vectors of different dimensions.")
 
+    distance = 0;
+    for i=1:length(vector1)
+        new = abs(vector1(i)-vector2(i));
+        if new > distance
+            distance = new;
+        end
+    end
+end
