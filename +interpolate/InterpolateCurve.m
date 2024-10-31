@@ -1,4 +1,4 @@
-classdef InterpolateLine < handle
+classdef InterpolateCurve < handle
     properties
         n (1,1) double
         points (:, 3) double 
@@ -11,7 +11,7 @@ classdef InterpolateLine < handle
     end
 
     methods
-        function obj = InterpolateLine(points, lower_bound, upper_bound)
+        function obj = InterpolateCurve(points, lower_bound, upper_bound)
             arguments
                 points (:, 3) double 
                 lower_bound (1,1) double

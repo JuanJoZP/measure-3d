@@ -1,4 +1,4 @@
-classdef InterpolateLineTest < matlab.unittest.TestCase
+classdef InterpolateCurveTest < matlab.unittest.TestCase
   
     methods (Test)
 
@@ -14,10 +14,10 @@ classdef InterpolateLineTest < matlab.unittest.TestCase
             y = radius.*sin(t);
             z = height.*t;
 
-            % get interpolateLine
-            import interpolate.InterpolateLine
+            % get InterpolateCurve
+            import interpolate.InterpolateCurve
             points = [x' y' z']; 
-            param = InterpolateLine(points, lower, upper);
+            param = InterpolateCurve(points, lower, upper);
 
             % get uniform sample from coil equation
             t_sample = linspace(lower + t(2)/2, upper - t(2)/2, n_points - 1); % so that samples are in the middle of fixed points
@@ -51,10 +51,10 @@ classdef InterpolateLineTest < matlab.unittest.TestCase
             y = sin(1.*t) - 2.*sin(2.*t);
             z = -sin(3.*t);
 
-            % get interpolateLine
-            import interpolate.InterpolateLine
+            % get InterpolateCurve
+            import interpolate.InterpolateCurve
             points = [x' y' z']; 
-            param = InterpolateLine(points, lower, upper);
+            param = InterpolateCurve(points, lower, upper);
 
             % get uniform sample from coil equation
             t_sample = linspace(lower + t(2)/2, upper - t(2)/2, n_points); % so that samples are in the middle of fixed points
@@ -91,10 +91,10 @@ classdef InterpolateLineTest < matlab.unittest.TestCase
             y = a.*t.*sin(1.*t);
             z = height.*t;         
 
-            % get interpolateLine
-            import interpolate.InterpolateLine
+            % get InterpolateCurve
+            import interpolate.InterpolateCurve
             points = [x' y' z'];
-            param = InterpolateLine(points, lower, upper);
+            param = InterpolateCurve(points, lower, upper);
 
             % get uniform sample from coil equation
             t_sample = linspace(lower + t(2)/2, upper - t(2)/2, n_points); % so that samples are in the middle of fixed points
