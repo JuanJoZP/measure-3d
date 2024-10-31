@@ -1,6 +1,6 @@
 function l = integrateLength(parametrization)
     arguments
-        parametrization interpolate.InterpolateLine
+        parametrization interpolate.InterpolateCurve
     end
     import utils.evalf
     import derivate.richardson

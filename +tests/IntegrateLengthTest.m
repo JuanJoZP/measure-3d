@@ -15,9 +15,9 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
             z = 0.*t;
 
             % generate interpolation
-            import interpolate.InterpolateLine
+            import interpolate.InterpolateCurve
             points = [x' y' z']; 
-            param = InterpolateLine(points, lower, upper);
+            param = InterpolateCurve(points, lower, upper);
 
             % calculate length
             import integrate.integrateLength
@@ -41,9 +41,9 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
             z = height.*t;
 
             % generate interpolation
-            import interpolate.InterpolateLine
+            import interpolate.InterpolateCurve
             points = [x' y' z']; 
-            param = InterpolateLine(points, lower, upper);
+            param = InterpolateCurve(points, lower, upper);
             
             % calculate length
             import integrate.integrateLength
@@ -64,10 +64,10 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
             y = sin(1.*t) - 2.*sin(2.*t);
             z = -sin(3.*t);
 
-            % get interpolateLine
-            import interpolate.InterpolateLine
+            % get InterpolateCurve
+            import interpolate.InterpolateCurve
             points = [x' y' z']; 
-            param = InterpolateLine(points, lower, upper);
+            param = InterpolateCurve(points, lower, upper);
 
             % calculate length
             import integrate.integrateLength
@@ -92,10 +92,10 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
             y = a.*t.*sin(1.*t);
             z = height.*t;         
 
-            % get interpolateLine
-            import interpolate.InterpolateLine
+            % get InterpolateCurve
+            import interpolate.InterpolateCurve
             points = [x' y' z']; % half the points (odd index)
-            param = InterpolateLine(points, lower, upper);
+            param = InterpolateCurve(points, lower, upper);
 
             % calculate length
             import integrate.integrateLength
