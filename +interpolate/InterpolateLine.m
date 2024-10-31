@@ -2,6 +2,7 @@ classdef InterpolateLine < handle
     properties
         n (1,1) double
         points (:, 3) double 
+        t (1, :) double
         lower_bound (1,1) double
         upper_bound (1,1) double
         splines_x
@@ -25,6 +26,7 @@ classdef InterpolateLine < handle
             import interpolate.CubicSplines
             obj.n = length(x);
             obj.points = points;
+            obj.t = t;
             obj.lower_bound = lower_bound;
             obj.upper_bound = upper_bound;
             obj.splines_x = CubicSplines([t' x]);
