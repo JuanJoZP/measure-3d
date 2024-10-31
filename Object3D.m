@@ -15,7 +15,7 @@ classdef Object3D
             elseif isnumeric(inputArg)  
                 % Validate points 
                 assert(isa(inputArg, 'double') && size(inputArg, 2) == 3, ...
-                    "Points must be a double array with shape (3, :)");
+                    "Points must be a double array with shape (:, 3)");
 
                 obj.points = inputArg;
         
