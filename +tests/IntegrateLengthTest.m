@@ -18,7 +18,6 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
             import interpolate.InterpolateLine
             points = [x' y' z']; 
             param = InterpolateLine(points, lower, upper);
-            param.show()
 
             % calculate length
             import integrate.integrateLength
@@ -57,17 +56,17 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
 
         function trefoilKnot(testCase)
             % generate trefoil parametrization
-            n_points = 10;
+            n_points = 12;
             lower = 0;
             upper = 2*pi;
-            t = linspace(lower, upper, n_points); % 0 to 2π×lcm(p,q) (theta)
+            t = linspace(lower, upper, n_points); 
             x = cos(1.*t) + 2.*cos(2.*t);
             y = sin(1.*t) - 2.*sin(2.*t);
             z = -sin(3.*t);
 
             % get interpolateLine
             import interpolate.InterpolateLine
-            points = [x' y' z']; % half the points (odd index)
+            points = [x' y' z']; 
             param = InterpolateLine(points, lower, upper);
 
             % calculate length
@@ -75,7 +74,7 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
             aprox_length = integrateLength(param);
 
             f = @(t) sqrt((-sin(t) - 4*sin(2*t)).^2 + (cos(t) - 4*cos(2*t)).^2 + (-3*cos(3*t)).^2);
-            length = integral(f, upper, lower); % calculating ds analytically, integrating numerically
+            length = integral(f, lower, upper);
             relative_error = abs((length - aprox_length)/length)*100;
             verifyLessThan(testCase, relative_error, 5);
         end
@@ -102,7 +101,8 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
             import integrate.integrateLength
             aprox_length = integrateLength(param);
 
-            length = 3*pi * sqrt(a^2 + height^2) * sqrt(1 + (36*a^2*pi^2)/(height^2)); % calculating ds analytically, integrating numerically
+            ds = @(t) sqrt((a .* (cos(t) - t .* sin(t))).^2 + (a .* (sin(t) + t .* cos(t))).^2 + height^2);
+            length = integral(ds, lower, upper); % calculating ds analytically, integrating numerically
             relative_error = abs((length - aprox_length)/length)*100;
             verifyLessThan(testCase, relative_error, 5);
         end
