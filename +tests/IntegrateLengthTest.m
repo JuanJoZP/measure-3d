@@ -3,13 +3,11 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
     methods (Test)
 
         function circle(testCase)
-            % generate line parametrization
-            radius = 2;
-            height = 5;
+            % generate circle parametrization
             n_points = 10;
             lower = 0;
             upper = 2*pi;
-            t = linspace(lower, upper, n_points); % three turns
+            t = linspace(lower, upper, n_points);
             x = 1.*cos(1.*t);
             y = 1.*sin(1.*t);
             z = 0.*t;
@@ -20,7 +18,7 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
             param = InterpolateCurve(points, lower, upper);
 
             % calculate length
-            import integrate.integrateLength
+            import length.integrateLength
             aprox_length = integrateLength(param);
 
             length = 2*pi; % analytic solution
@@ -46,7 +44,7 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
             param = InterpolateCurve(points, lower, upper);
             
             % calculate length
-            import integrate.integrateLength
+            import length.integrateLength
             aprox_length = integrateLength(param);
 
             length = sqrt(radius^2 + height^2)*(upper - lower); % analytic solution
@@ -70,7 +68,7 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
             param = InterpolateCurve(points, lower, upper);
 
             % calculate length
-            import integrate.integrateLength
+            import length.integrateLength
             aprox_length = integrateLength(param);
 
             f = @(t) sqrt((-sin(t) - 4*sin(2*t)).^2 + (cos(t) - 4*cos(2*t)).^2 + (-3*cos(3*t)).^2);
@@ -98,7 +96,7 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
             param = InterpolateCurve(points, lower, upper);
 
             % calculate length
-            import integrate.integrateLength
+            import length.integrateLength
             aprox_length = integrateLength(param);
 
             ds = @(t) sqrt((a .* (cos(t) - t .* sin(t))).^2 + (a .* (sin(t) + t .* cos(t))).^2 + height^2);
