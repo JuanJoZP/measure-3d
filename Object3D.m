@@ -1,6 +1,7 @@
-classdef Object3D 
+classdef Object3D < handle
     properties
         points (:, 3) double
+        alpha_complex
     end
     
     methods
@@ -28,12 +29,18 @@ classdef Object3D
             scatter3(obj.points(:, 1), obj.points(:, 2), obj.points(:, 3))
         end
 
-        function volume = volumeTotal(obj)
-            error("Not implemented yet")
+        function obj = setAlphaComplex(obj, alpha)
+            obj.alpha_complex = alphaShape(obj.points, alpha);
         end
 
-        function surface = surfaceTotal(obj)
-            error("Not implemented yet")
+        function vol = volumeTotal(obj)
+            assert(isa(obj.alpha_complex, 'alphaShape'), "In order to calculate volume alpha complex must be set")
+            vol = volume(obj.alpha_complex);
+        end
+
+        function area = areaTotal(obj)
+            assert(isa(obj.alpha_complex, 'alphaShape'), "In order to calculate volume alpha complex must be set")
+            area = surfaceArea(obj.alpha_complex);
         end
     end
 end
