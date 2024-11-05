@@ -11,11 +11,12 @@ classdef InterpolateCurve < handle
     end
 
     methods
-        function obj = InterpolateCurve(points, lower_bound, upper_bound)
+        function obj = InterpolateCurve(points, lower_bound, upper_bound, options)
             arguments
                 points (:, 3) double 
                 lower_bound (1,1) double
                 upper_bound (1,1) double
+                options.deegre {mustBeMember(options.deegre, {'cubic', 'linear'})} = 'cubic'
             end
 
             x = points(:, 1);
@@ -23,15 +24,24 @@ classdef InterpolateCurve < handle
             z = points(:, 3);
             t = linspace(lower_bound, upper_bound, length(x));
         
-            import interpolate.CubicSplines
             obj.n = length(x);
             obj.points = points;
             obj.t = t;
             obj.lower_bound = lower_bound;
             obj.upper_bound = upper_bound;
-            obj.splines_x = CubicSplines([t' x]);
-            obj.splines_y = CubicSplines([t' y]);
-            obj.splines_z = CubicSplines([t' z]);
+            
+            import interpolate.CubicSplines
+            import interpolate.LinearSplines
+
+            if strcmp(options.deegre, 'cubic')
+                obj.splines_x = CubicSplines([t' x]);
+                obj.splines_y = CubicSplines([t' y]);
+                obj.splines_z = CubicSplines([t' z]);
+            elseif strcmp(options.deegre, 'linear')
+                obj.splines_x = LinearSplines([t' x]);
+                obj.splines_y = LinearSplines([t' y]);
+                obj.splines_z = LinearSplines([t' z]);
+            end
         end
 
         function show(obj, options)

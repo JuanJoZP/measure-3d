@@ -29,6 +29,21 @@ classdef Object3D < handle
             scatter3(obj.points(:, 1), obj.points(:, 2), obj.points(:, 3))
         end
 
+        function length = lengthCurve(~, curve_points, interpolation_deegre)
+            arguments
+                ~
+                curve_points (:, 3) double
+                interpolation_deegre {mustBeMember(interpolation_deegre, {'linear', 'cubic'})}
+            end
+            % POR AHORA ASI, LUEGO CON INDICES DE CADA PUNTO PARA JUNTARLO
+            % CON LA SELECCION
+            import interpolate.InterpolateCurve
+            import integrate.integrateLength
+
+            parametrization = InterpolateCurve(curve_points, 1, size(curve_points, 1), "deegre", interpolation_deegre);
+            length = integrateLength(parametrization);
+        end
+
         function obj = setAlphaComplex(obj, alpha)
             obj.alpha_complex = alphaShape(obj.points, alpha);
         end
