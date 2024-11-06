@@ -25,8 +25,12 @@ classdef Object3D < handle
             end
         end
         
-        function plot(obj)
-            scatter3(obj.points(:, 1), obj.points(:, 2), obj.points(:, 3))
+        function plot(obj, ax)
+            if nargin == 1
+                scatter3(obj.points(:, 1), obj.points(:, 2), obj.points(:, 3))
+            elseif nargin == 2
+                scatter3(ax, obj.points(:, 1), obj.points(:, 2), obj.points(:, 3))
+            end
         end
 
         function length = lengthCurve(~, curve_points, interpolation_deegre)

@@ -1,0 +1,68 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="4195623289" file="/home/juanjozp/Desktop/measure-3d/measure-3d.prj" location="/home/juanjozp/Desktop/measure-3d" name="measure-3d" target="target.mlapps" target-name="Package App">
+    <param.appname>measure-3d</param.appname>
+    <param.authnamewatermark>Juan José Zuluaga</param.authnamewatermark>
+    <param.email>juanjo.zuluaga@urosario.edu.co</param.email>
+    <param.company />
+    <param.icon />
+    <param.icons />
+    <param.summary>App for measuring 3D Objects represented by cloud of points</param.summary>
+    <param.description />
+    <param.screenshot />
+    <param.version>1.0</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>/home/juanjozp/Desktop/measure3d project</param.output>
+    <param.guid>ee616c1d-0080-4588-b9a0-869c39b7a99c</param.guid>
+    <unset>
+      <param.company />
+      <param.icon />
+      <param.icons />
+      <param.description />
+      <param.screenshot />
+      <param.version />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}/app.mlapp</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}/+interpolate/CubicSplines.m</file>
+      <file>${PROJECT_ROOT}/+interpolate/InterpolateCurve.m</file>
+      <file>${PROJECT_ROOT}/+interpolate/LinearSplines.m</file>
+      <file>${PROJECT_ROOT}/+utils/EqSystem.m</file>
+      <file>${PROJECT_ROOT}/+utils/evalf.m</file>
+      <file>${PROJECT_ROOT}/Object3D.m</file>
+    </fileset.depfun>
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="/home/juanjozp/Desktop" name="measure3d project" optional="false">/home/juanjozp/Desktop/measure3d project</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>/usr/local/MATLAB/R2024b</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>true</unix>
+      <mac>false</mac>
+      <windows>false</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>true</linux>
+      <solaris>false</solaris>
+      <osver>6.9.3-76060903-generic</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>glnxa64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
