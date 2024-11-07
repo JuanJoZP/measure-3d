@@ -39,10 +39,8 @@ classdef Object3D < handle
                 curve_points (:, 3) double
                 interpolation_deegre {mustBeMember(interpolation_deegre, {'linear', 'cubic'})}
             end
-            % POR AHORA ASI, LUEGO CON INDICES DE CADA PUNTO PARA JUNTARLO
-            % CON LA SELECCION
             import interpolate.InterpolateCurve
-            import integrate.integrateLength
+            import length.integrateLength
 
             parametrization = InterpolateCurve(curve_points, 1, size(curve_points, 1), "deegre", interpolation_deegre);
             length = integrateLength(parametrization);
