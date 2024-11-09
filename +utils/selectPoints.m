@@ -1,25 +1,27 @@
-function [handleNext] = selectPoints(fig)
+function [handleNext] = selectPoints(app)
     pts = [];
-    function [new_pts, ended] = nextSelect(fig)
-        %datacursormode on
-        dcm_obj = datacursormode(fig);
-        f = [];
+    function [new_pts, ended] = nextSelect(app)
+        tth = findall(app.plot_axis,'Type','hggroup');     % find any pre-existing data tips
+        delete(tth)    
+        tth = [];
         ended = false;
-        while isempty(f)
-            old_char = fig.CurrentCharacter;
-            uiwait(fig)
-            new_char = fig.CurrentCharacter;
-            if old_char ~= new_char % if user presses a key
+        while isempty(tth)
+            uiwait(app.UIFigure)
+            disp("resumed")
+            if strcmp(app.resumeSource, 'keypress')
                 ended = true;
-                break
+                new_pts = pts;
+                return
             end
-            f = getCursorInfo(dcm_obj);
+            tth = findall(app.plot_axis,'Type','hggroup');
+            disp(tth)
+            pos = tth.Position;
+            pause(0.1)
         end
-        new_pts = [pts; f.Position];
+        new_pts = [pts; pos];
         pts = new_pts;
-        delete(findall(fig,'Type','hggroup'));
     end
     
-    handleNext = @() nextSelect(fig);
+    handleNext = @() nextSelect(app);
     
 end
