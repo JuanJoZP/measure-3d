@@ -25,11 +25,17 @@ classdef Object3D < handle
             end
         end
         
-        function plot(obj, ax)
-            if nargin == 1
-                scatter3(obj.points(:, 1), obj.points(:, 2), obj.points(:, 3))
-            elseif nargin == 2
-                scatter3(ax, obj.points(:, 1), obj.points(:, 2), obj.points(:, 3))
+        function plot(obj, ax, options)
+            arguments
+                obj
+                ax
+                options.hold = false
+            end
+            scatter3(ax, obj.points(:, 1), obj.points(:, 2), obj.points(:, 3))
+
+            hold(ax, "on")
+            if ~options.hold
+                hold(ax, "false");
             end
         end
 
@@ -39,10 +45,8 @@ classdef Object3D < handle
                 curve_points (:, 3) double
                 interpolation_deegre {mustBeMember(interpolation_deegre, {'linear', 'cubic'})}
             end
-            % POR AHORA ASI, LUEGO CON INDICES DE CADA PUNTO PARA JUNTARLO
-            % CON LA SELECCION
             import interpolate.InterpolateCurve
-            import integrate.integrateLength
+            import length.integrateLength
 
             parametrization = InterpolateCurve(curve_points, 1, size(curve_points, 1), "deegre", interpolation_deegre);
             length = integrateLength(parametrization);

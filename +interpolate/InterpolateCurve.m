@@ -44,14 +44,15 @@ classdef InterpolateCurve < handle
             end
         end
 
-        function show(obj, options)
+        function show(obj, ax, options)
             arguments
                 obj
+                ax
                 options.hold = false
             end
 
             import utils.evalf
-            n_points = 3*obj.n; % not sure
+            n_points = 100; % not sure
             t = linspace(obj.lower_bound, obj.upper_bound, n_points);
             x = zeros(1, n_points);
             y = zeros(1, n_points);
@@ -72,12 +73,12 @@ classdef InterpolateCurve < handle
             y(end) = evalf(obj.splines_y.splines(end),t(end));
             z(end) = evalf(obj.splines_z.splines(end),t(end));
 
-            plot3(x, y, z, "-", 'Color', [0 0.4470 0.7410], 'LineWidth',2);
-            hold on;
+            plot3(ax, x, y, z, "-", 'Color', [0 0.4470 0.7410], 'LineWidth',2);
+            hold(ax, 'on');
             p = obj.points;
-            plot3(p(:, 1), p(:, 2), p(:, 3), ".", 'Color', [0.8500 0.3250 0.0980], 'MarkerSize',20);
+            plot3(ax, p(:, 1), p(:, 2), p(:, 3), ".", 'Color', [0.8500 0.3250 0.0980], 'MarkerSize',20);
             if options.hold == false
-                hold off;
+                hold(ax, 'off');
             end
         end
 
