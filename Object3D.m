@@ -2,6 +2,7 @@ classdef Object3D < handle
     properties
         points (:, 3) double
         alpha_complex
+        alpha_range (2, 1) double
     end
     
     methods
@@ -23,6 +24,10 @@ classdef Object3D < handle
             else
                 error("Invalid input. Provide either a filename or a matrix of points.");
             end
+
+            import linalg.max_dist
+            obj.alpha_complex = alphaShape(obj.points);
+            obj.alpha_range = [0; 7]; % hardcoded, could need a bigger range for larger models
         end
         
         function plot(obj, ax, options)
@@ -31,11 +36,12 @@ classdef Object3D < handle
                 ax
                 options.hold = false
             end
-            scatter3(ax, obj.points(:, 1), obj.points(:, 2), obj.points(:, 3))
+            scatter3(ax, obj.points(:, 1), obj.points(:, 2), obj.points(:, 3), "MarkerEdgeColor",[0 0.4470 0.7410])
+            %plot3(ax, obj.points(:, 1), obj.points(:, 2), obj.points(:, 3), 'o', 'Color', [0 0.4470 0.7410], 'MarkerSize',10)
 
             hold(ax, "on")
             if ~options.hold
-                hold(ax, "false");
+                hold(ax, "off");
             end
         end
 
@@ -53,16 +59,15 @@ classdef Object3D < handle
         end
 
         function obj = setAlphaComplex(obj, alpha)
-            obj.alpha_complex = alphaShape(obj.points, alpha);
+            assert(alpha > obj.alpha_range(1) & alpha <= obj.alpha_range(2))
+            obj.alpha_complex.Alpha = alpha;
         end
 
         function vol = volumeTotal(obj)
-            assert(isa(obj.alpha_complex, 'alphaShape'), "In order to calculate volume alpha complex must be set")
             vol = volume(obj.alpha_complex);
         end
 
         function area = areaTotal(obj)
-            assert(isa(obj.alpha_complex, 'alphaShape'), "In order to calculate volume alpha complex must be set")
             area = surfaceArea(obj.alpha_complex);
         end
     end
