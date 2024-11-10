@@ -25,7 +25,6 @@ classdef Object3D < handle
                 error("Invalid input. Provide either a filename or a matrix of points.");
             end
 
-            import linalg.max_dist
             obj.alpha_complex = alphaShape(obj.points);
             obj.alpha_range = [0; 7]; % hardcoded, could need a bigger range for larger models
         end
