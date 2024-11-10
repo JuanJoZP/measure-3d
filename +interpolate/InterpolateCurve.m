@@ -52,7 +52,7 @@ classdef InterpolateCurve < handle
             end
 
             import utils.evalf
-            n_points = 100; % not sure
+            n_points = 30*obj.n; % not sure
             t = linspace(obj.lower_bound, obj.upper_bound, n_points);
             x = zeros(1, n_points);
             y = zeros(1, n_points);
