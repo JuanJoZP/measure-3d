@@ -53,29 +53,34 @@ classdef InterpolateCurve < handle
 
             import utils.evalf
             n_points = 30*obj.n; % not sure
-            t = linspace(obj.lower_bound, obj.upper_bound, n_points);
+            t_ = linspace(obj.lower_bound, obj.upper_bound, n_points);
             x = zeros(1, n_points);
             y = zeros(1, n_points);
             z = zeros(1, n_points);
+            p = obj.points;
             j = 1;
             for i=1:(obj.n-1) % for each spline
                 spline_x = obj.splines_x.splines(i);
                 spline_y = obj.splines_y.splines(i);
                 spline_z = obj.splines_z.splines(i);
-                while t(j) < obj.splines_x.points(i+1, 1)
-                    x(j) = evalf(spline_x,t(j));
-                    y(j) = evalf(spline_y,t(j));
-                    z(j) = evalf(spline_z,t(j));
+                while t_(j) < obj.splines_x.points(i+1, 1)
+                    x(j) = evalf(spline_x,t_(j));
+                    y(j) = evalf(spline_y,t_(j));
+                    z(j) = evalf(spline_z,t_(j));
                     j = j + 1;
                 end
+                x(j) = p(i+1, 1);
+                y(j) = p(i+1, 2);
+                z(j) = p(i+1, 3);
+                j = j + 1;
             end
-            x(end) = evalf(obj.splines_x.splines(end),t(end));
-            y(end) = evalf(obj.splines_y.splines(end),t(end));
-            z(end) = evalf(obj.splines_z.splines(end),t(end));
+            x(end) = evalf(obj.splines_x.splines(end),t_(end));
+            y(end) = evalf(obj.splines_y.splines(end),t_(end));
+            z(end) = evalf(obj.splines_z.splines(end),t_(end));
 
             plot3(ax, x, y, z, "-", 'Color', [0 0.4470 0.7410], 'LineWidth',2);
             hold(ax, 'on');
-            p = obj.points;
+            
             plot3(ax, p(:, 1), p(:, 2), p(:, 3), ".", 'Color', [0.8500 0.3250 0.0980], 'MarkerSize',20);
             if options.hold == false
                 hold(ax, 'off');
