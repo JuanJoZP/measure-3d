@@ -10,12 +10,12 @@ function length = integrateLength(parametrization)
     get_spline_y = @(i) parametrization.splines_y.splines(i);
     get_spline_z = @(i) parametrization.splines_z.splines(i);
 
-    % changing h and incrementing extrapolation order does not seems to
-    % increment precision
+    % cambiar h e incrementar el orden de extrapolacion parece no
+    % incrementar la precision
     dx = @(t, i) richardson(@(x) evalf(get_spline_x(i),x), t, 0.1, 1); 
     dy = @(t, i) richardson(@(x) evalf(get_spline_y(i),x), t, 0.1, 1);
     dz = @(t, i) richardson(@(x) evalf(get_spline_z(i),x), t, 0.1, 1);
-    ds = @(t, i) sqrt(dx(t, i)^2 + dy(t, i)^2 + dz(t, i)^2); % arc length
+    ds = @(t, i) sqrt(dx(t, i)^2 + dy(t, i)^2 + dz(t, i)^2); % longitud de arco
  
     length = 0;    
     num_splines = size(parametrization.points, 1)-1;
