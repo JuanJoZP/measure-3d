@@ -36,8 +36,9 @@ classdef Object3D < handle
                 options.hold = false
             end
             scatter3(ax, obj.points(:, 1), obj.points(:, 2), obj.points(:, 3), "MarkerEdgeColor",[0 0.4470 0.7410])
-            %plot3(ax, obj.points(:, 1), obj.points(:, 2), obj.points(:, 3), 'o', 'Color', [0 0.4470 0.7410], 'MarkerSize',10)
-
+            grid(ax, "on")
+            axis(ax, "equal")
+            xlabel(ax, 'X'); ylabel(ax, 'Y'); zlabel(ax, 'Z');
             hold(ax, "on")
             if ~options.hold
                 hold(ax, "off");

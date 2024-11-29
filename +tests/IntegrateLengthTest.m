@@ -80,7 +80,7 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
 
         function archimedeanSpiral(testCase)
             % generate trefoil parametrization
-            n_points = 12;
+            n_points = 102;
             height = 3;
             a = 0.2;
             lower = 0;
@@ -93,6 +93,7 @@ classdef IntegrateLengthTest < matlab.unittest.TestCase
             % get InterpolateCurve
             import interpolate.InterpolateCurve
             points = [x' y' z']; % half the points (odd index)
+            plot3(x,y,z)
             param = InterpolateCurve(points, lower, upper);
 
             % calculate length
